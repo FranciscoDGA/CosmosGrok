@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+/* ============================================================
+   CosmosGrok — Design System (Tailwind v4 tokens)
+   Paleta: fundo #0B0F19 · destaque #7C5CFF · secundário #00D4FF
+   ============================================================ */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space), var(--font-inter), ui-sans-serif, sans-serif;
+
+  /* Escala cósmica fixa (não muda com tema) */
+  --color-space-950: #070a12;
+  --color-space-900: #0b0f19;
+  --color-space-850: #0e1424;
+  --color-space-800: #131b30;
+  --color-space-700: #1d2740;
+  --color-nebula-500: #7c5cff;
+  --color-nebula-400: #9a86ff;
+  --color-nebula-300: #b7a8ff;
+  --color-pulsar-500: #00d4ff;
+  --color-pulsar-300: #7ceaff;
+}
+
+/* Tokens semânticos — trocados por [data-theme] */
+:root {
+  --bg: #0b0f19;
+  --bg-subtle: #0e1424;
+  --bg-elevated: #131b30;
+  --bg-soft: #1d2740;
+  --fg: #f0f4ff;
+  --fg-muted: #a0aec0;
+  --fg-faint: #6b7a99;
+  --line: rgba(240, 244, 255, 0.09);
+  --line-strong: rgba(240, 244, 255, 0.16);
+  --accent: #7c5cff;
+  --accent-2: #00d4ff;
+  --accent-soft: rgba(124, 92, 255, 0.14);
+  --glass: rgba(19, 27, 48, 0.72);
+  --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.75);
+  --danger: #ff6b81;
+  --success: #3ddc97;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f4f6ff;
+  --bg-subtle: #eaeeff;
+  --bg-elevated: #ffffff;
+  --bg-soft: #dfe5fb;
+  --fg: #0b0f19;
+  --fg-muted: #4b5675;
+  --fg-faint: #77839f;
+  --line: rgba(11, 15, 25, 0.1);
+  --line-strong: rgba(11, 15, 25, 0.2);
+  --accent: #6244f5;
+  --accent-2: #0093c4;
+  --accent-soft: rgba(98, 68, 245, 0.1);
+  --glass: rgba(255, 255, 255, 0.78);
+  --shadow: 0 24px 60px -30px rgba(20, 28, 60, 0.4);
+  --danger: #d93a55;
+  --success: #12996a;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-elevated: var(--bg-elevated);
+  --color-soft: var(--bg-soft);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-faint: var(--fg-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-glass: var(--glass);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 45%, transparent);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
+  }
+
+  * {
+    border-color: var(--line);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--accent) 0%,
+      var(--accent-2) 55%,
+      var(--accent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .card {
+    background: color-mix(in oklab, var(--bg-elevated) 88%, transparent);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+  }
+
+  .glow-accent {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent),
+      0 18px 50px -20px color-mix(in oklab, var(--accent) 65%, transparent);
+  }
+
+  .hairline {
+    border: 1px solid var(--line);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility animate-float {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
